@@ -184,7 +184,7 @@ $(document).ready(function () {
         },
         data: {
             // Event title
-            title: "Ram and Antara's Wedding",
+            title: "Liyang and Yichao's Wedding",
 
             // Event start date
             start: new Date('Nov 27, 2017 10:00'),
@@ -239,33 +239,27 @@ $(document).ready(function () {
 
 /********************** Extras **********************/
 
-// Google map
+// AMap
 function initMap() {
-    var location = {lat: 22.5932759, lng: 88.27027720000001};
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    var map = new AMap.Map(document.getElementById('map-canvas'), {
+        resizeEnable: true,
         zoom: 15,
-        center: location,
+        center: [118.857765,30.053685],
         scrollwheel: false
     });
 
-    var marker = new google.maps.Marker({
-        position: location,
-        map: map
-    });
-}
-
-function initBBSRMap() {
-    var la_fiesta = {lat: 20.305826, lng: 85.85480189999998};
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: 15,
-        center: la_fiesta,
-        scrollwheel: false
+    AMap.plugin('AMap.ToolBar', function () {
+        var toolbar = new AMap.ToolBar();
+        map.addControl(toolbar);
     });
 
-    var marker = new google.maps.Marker({
-        position: la_fiesta,
-        map: map
+    var marker = new AMap.Marker({
+        position: map.getCenter(),
+        title: '婚礼地点'
     });
+
+    map.add(marker);
+
 }
 
 // alert_markup
