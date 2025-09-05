@@ -184,23 +184,23 @@ $(document).ready(function () {
         },
         data: {
             // Event title
-            title: "Liyang and Yichao's Wedding",
+            title: "洪理杨和袁怡超的婚礼",
 
             // Event start date
-            start: new Date('Nov 27, 2017 10:00'),
+            start: new Date('Oct 3, 2025 16:00'),
 
             // Event duration (IN MINUTES)
             // duration: 120,
 
             // You can also choose to set an end time
             // If an end time is set, this will take precedence over duration
-            end: new Date('Nov 29, 2017 00:00'),
+            end: new Date('Oct 3, 2025 20:00'),
 
             // Event Address
-            address: 'ITC Fortune Park Hotel, Kolkata',
+            address: '安徽省歙县三阳镇小岫村',
 
             // Event Description
-            description: "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210."
+            description: "期待您的光临！如有任何问题，请联系 13955965061（洪路来）。",
         }
     });
 
@@ -212,7 +212,7 @@ $(document).ready(function () {
         e.preventDefault();
         var data = $(this).serialize();
 
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+        $('#alert-wrapper').html(alert_markup('info', '稍等！正在保存您的提交……'));
 
         $.post('https://script.google.com/macros/s/AKfycbxxr5y6HZKRJTWH5mYN6ONKxUVGHGbodd7PgpRZ7gL8NgzZBAm54GZaenWNuUtE4NXoFw/exec', data)
             .done(function (data) {
@@ -226,10 +226,9 @@ $(document).ready(function () {
             })
             .fail(function (data) {
                 console.log(data);
-                $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+                $('#alert-wrapper').html(alert_markup('danger', '糟糕！服务器出现了问题，请电话或微信联系我们。'));
             });
     });
-
 });
 
 /********************** Extras **********************/
