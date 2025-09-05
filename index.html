@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Liyang & Yichao getting hitched!</title>
+    <title>我们结婚啦</title>
     <meta name="description" content="We would like to invite you to our big day.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ffffff">
@@ -73,8 +73,6 @@
                 <div class="header-nav">
                     <nav>
                         <ul class="primary-nav">
-                            <li><a href="#intro">相识</a></li>
-                            <li><a href="#eng-pics">相知</a></li>
                         </ul>
                         <ul class="member-actions">
                             <li><a href="#map" class="login">地点</a></li>
@@ -114,37 +112,195 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <h3>我们结婚啦</h3>
-                <p>2025 年 10 月 3 号，期待您的见证！</p>
-                <div class="share-bar"></div>
+                <p>2025 年 10 月 3 号</p>
+                <div class="calendar-box" style="max-width:900px;margin:0 auto"></div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- 日历专属样式 -->
+<style>
+.calendar-box{
+    display:inline-block;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 6px 24px rgba(0,0,0,.06);
+    padding:30px 40px 40px;
+}
+.cal-table{width:100%;border-collapse:collapse;font-size:20px;color:#333}
+.cal-table th,.cal-table td{width:14.285%;text-align:center;padding:12px 12px}
+.cal-table th{color:#888;font-weight:500;font-size:18px}
+.cal-table .weekend{color:#999}
+.cal-table .love{
+  color:#ff5a7f;
+  font-weight:bold;
+  position:relative;
+}
+/* 小爱心 */
+.cal-table .love::after,
+.cal-table .love::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:7px;
+  width:11px;
+  height:10px;
+  background:#ff5a7f;
+  border-radius:50% 50% 0 50%;
+  transform:rotate(-45deg) translateX(-50%);
+  transform-origin:0 100%;
+}
+.cal-table .love::before{
+  border-radius:50% 50% 50% 0;
+  transform:rotate(45deg) translateX(-50%);
+  transform-origin:100% 100%;
+}
+/* 移动端缩小 */
+@media (max-width:576px){
+  .cal-table{font-size:16px}
+  .cal-table th,.cal-table td{padding:9px 0}
+}
+</style>
+
+<!-- 日历脚本 -->
+<script>
+(function(){
+  const year = 2025, month = 9;          // 2025-10
+  const first = new Date(year, month, 1).getDay();
+  const days  = new Date(year, month+1, 0).getDate();
+  const loveDay = 3;
+
+  let html = '<table class="cal-table"><thead><tr>';
+  ['日','一','二','三','四','五','六'].forEach(d=> html += `<th>${d}</th>`);
+  html += '</tr></thead><tbody><tr>';
+
+  let date = 1;
+  for (let row = 0; row < 6; row++) {
+    for (let col = 0; col < 7; col++) {
+      if (row === 0 && col < first || date > days) {
+        html += '<td></td>';
+      } else {
+        const isWeekend = (col === 0 || col === 6);
+        const cls = (date === loveDay ? 'love' : '') + (isWeekend ? ' weekend' : '');
+        html += `<td class="${cls.trim()}">${date}</td>`;
+        date++;
+      }
+    }
+    html += '</tr>';
+    if (date > days) break;
+  }
+  html += '</tbody></table>';
+  document.querySelector('.calendar-box').innerHTML = html;
+})();
+</script>
+
 <section id="intro">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h3 class="header">How we met</h3>
+                <p>在这个不平凡的日子里</p>
+                <p>我们决定携手踏进人生的新阶段</p>
+                <p>成为彼此生命中最重要的人</p>
+                <p>真诚邀请各位亲朋好友</p>
+                <p>见证我们的幸福时刻</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 hidden-sm hidden-xs"><img src="img/IMG_2317.jpg" class="wp1"></div>
+            <div class="col-md-3 hidden-sm hidden-xs"></div>
+            <!-- 倒计时容器 -->
             <div class="col-md-6">
-                <p>
-                    I first saw Yichao in the Fall of 2008 when we started our undergrad. I was instantly attracted to
-                    her but was far too nervous to speak to her. I had told my friend I liked her and news had traveled
-                    fast and she soon found out. Her first reaction was "Who is Liyang?" and she began searching for me in
-                    the class. She started to take notice of me and no matter how boring the lecture was, we never
-                    missed a class after that. After a good few months I finally plucked up the courage to ask her out
-                    and the rest is history :)
-                </p>
+                <div id="wedding-countdown" style="text-align:center; padding:40px 0;">
+                    <h3 style="margin-bottom:25px;">婚礼倒计时</h3>
+
+                    <!-- 四块卡片 -->
+                    <div style="display:inline-flex; gap:15px; justify-content:center;">
+                    <!-- 天 -->
+                    <div class="count-card">
+                        <span class="count-num" id="cd-days">--</span>
+                        <span class="count-unit">天</span>
+                    </div>
+
+                    <!-- 小时 -->
+                    <div class="count-card">
+                        <span class="count-num" id="cd-hours">--</span>
+                        <span class="count-unit">小时</span>
+                    </div>
+
+                    <!-- 分钟 -->
+                    <div class="count-card">
+                        <span class="count-num" id="cd-minutes">--</span>
+                        <span class="count-unit">分钟</span>
+                    </div>
+
+                    <!-- 秒 -->
+                    <div class="count-card">
+                        <span class="count-num" id="cd-seconds">--</span>
+                        <span class="count-unit">秒</span>
+                    </div>
+                    </div>
+                </div>
+                <!-- 样式 -->
+                <style>
+                    .count-card{
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                    background:#fff;
+                    border:1px solid #e6e6e6;
+                    border-radius:8px;
+                    padding:15px 20px;
+                    min-width:80px;
+                    box-shadow:0 2px 6px rgba(0,0,0,.05);
+                    }
+                    .count-num{
+                    font-size:2.6em;
+                    font-weight:bold;
+                    color:#ff5a7f;          /* 主色调：可换成主题色 */
+                    line-height:1;
+                    }
+                    .count-unit{
+                    font-size:.9em;
+                    color:#666;
+                    margin-top:4px;
+                    }
+                </style>
+                <!-- 逻辑 -->
+                <script>
+                (function(){
+                    const weddingDate = new Date('2025-10-03T16:08:00');
+                    const els = {
+                    days   : document.getElementById('cd-days'),
+                    hours  : document.getElementById('cd-hours'),
+                    minutes: document.getElementById('cd-minutes'),
+                    seconds: document.getElementById('cd-seconds')
+                    };
+
+                    function update(){
+                    const diff = weddingDate - new Date();
+                    if(diff <= 0){
+                        document.getElementById('wedding-countdown').innerHTML =
+                        '<h4>婚礼进行中！</h4>';
+                        return;
+                    }
+                    const d = Math.floor(diff / 864e5);
+                    const h = Math.floor((diff % 864e5) / 36e5);
+                    const m = Math.floor((diff % 36e5) / 6e4);
+                    const s = Math.floor((diff % 6e4) / 1e3);
+
+                    els.days.textContent   = String(d).padStart(2,'0');
+                    els.hours.textContent  = String(h).padStart(2,'0');
+                    els.minutes.textContent= String(m).padStart(2,'0');
+                    els.seconds.textContent= String(s).padStart(2,'0');
+                    }
+                    update();
+                    setInterval(update,1000);
+                })();
+                </script>
             </div>
-            <div class="col-md-3 hidden-sm hidden-xs"><img src="img/DSD_0214.jpg" class="wp2"></div>
+            <div class="col-md-3 hidden-sm hidden-xs"></div>
         </div>
         <div class="row">
-            <div class="col-sm-4 col-sm-push-2 col-xs-6 hidden-md hidden-lg"><img src="img/IMG_2317.jpg" class="wp8"></div>
-            <div class="col-sm-4 col-sm-push-2 col-xs-6 hidden-md hidden-lg"><img src="img/DSD_0214.jpg" class="wp9"></div>
         </div>
     </div>
 </section>
@@ -153,67 +309,94 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h3 class="header">Engagement Pics</h3>
             </div>
         </div>
         <div class="row">
             <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/_RFX2942-lg.jpg">
+                <a class="fancybox" rel="group" href="img/eng_pics/ZERO0223.JPG">
                     <div class="img-wrap">
                         <div class="overlay">
                             <i class="fa fa-search"></i>
                         </div>
-                        <img src="img/eng_pics/_RFX2942-sm.jpg" alt=""/>
+                        <img src="img/eng_pics/ZERO0223.JPG" alt=""/>
                     </div>
                 </a>
             </div>
             <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/IMG_3483-lg.jpg">
+                <div class="row">
+                    <div>
+                        <a class="fancybox" rel="group" href="img/eng_pics/P383562333.jpg">
+                        <div class="img-wrap">
+                            <div class="overlay">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <img src="img/eng_pics/P383562333.jpg" alt=""/>
+                        </div>
+                        </a>
+                    </div> 
+                    <div>
+                        <a class="fancybox" rel="group" href="img/eng_pics/ZERO0016.JPG">
+                            <div class="img-wrap">
+                                <div class="overlay">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                                <img src="img/eng_pics/ZERO0016.JPG" alt=""/>
+                            </div>
+                        </a>
+                    </div>              
+                </div>
+            </div>
+            <div class="col-md-2">
+                <a class="fancybox" rel="group" href="img/eng_pics/ZERO0195.JPG">
                     <div class="img-wrap">
                         <div class="overlay">
                             <i class="fa fa-search"></i>
                         </div>
-                        <img src="img/eng_pics/IMG_3483-sm.jpg" alt=""/>
+                        <img src="img/eng_pics/ZERO0195.JPG" alt=""/>
                     </div>
                 </a>
             </div>
             <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/_RFX2992-lg.jpg">
+                <a class="fancybox" rel="group" href="img/eng_pics/ZERO0463.JPG">
                     <div class="img-wrap">
                         <div class="overlay">
                             <i class="fa fa-search"></i>
                         </div>
-                        <img src="img/eng_pics/_RFX2992-sm.jpg" alt=""/>
+                        <img src="img/eng_pics/ZERO0463.JPG" alt=""/>
                     </div>
                 </a>
             </div>
             <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/_RFX3064-lg.jpg">
-                    <div class="img-wrap">
-                        <div class="overlay">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <img src="img/eng_pics/_RFX3064-sm.jpg" alt=""/>
+                <div class="row">
+                    <div>
+                        <a class="fancybox" rel="group" href="img/eng_pics/ZERO0135.JPG">
+                            <div class="img-wrap">
+                                <div class="overlay">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                                <img src="img/eng_pics/ZERO0135.JPG" alt=""/>
+                            </div>
+                        </a>
                     </div>
-                </a>
+                    <div>
+                        <a class="fancybox" rel="group" href="img/eng_pics/ZERO0549.JPG">
+                        <div class="img-wrap">
+                            <div class="overlay">
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <img src="img/eng_pics/ZERO0549.JPG" alt=""/>
+                        </div>
+                        </a>
+                    </div>               
+                </div>
             </div>
             <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/NGP_4089-lg.jpg">
+                <a class="fancybox" rel="group" href="img/eng_pics/ZERO0530.JPG">
                     <div class="img-wrap">
                         <div class="overlay">
                             <i class="fa fa-search"></i>
                         </div>
-                        <img src="img/eng_pics/NGP_4089-sm.jpg" alt=""/>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/NGP_4119-lg.jpg">
-                    <div class="img-wrap">
-                        <div class="overlay">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <img src="img/eng_pics/NGP_4119-sm.jpg" alt=""/>
+                        <img src="img/eng_pics/ZERO0530.JPG" alt=""/>
                     </div>
                 </a>
             </div>
