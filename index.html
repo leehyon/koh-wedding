@@ -420,9 +420,38 @@
 <section id="map" class="section-padding">
     <div class="text-center">
         <h2>婚礼地点</h2>
-        <p>安徽省歙县三阳镇小岫村</p>
     </div>
     <div id="map-canvas"></div>
+    <div id="map-content-wrapper" class="container pointer-events-none">
+        <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
+                <div class="text-center" style="padding: 10px;">
+                    <div id="btn-show-content" class="toggle-map-content pointer-events-auto">
+                        <i class="fa fa-info-circle"></i>&nbsp;&nbsp; 联系地址
+                    </div>
+                </div>
+                <div id="map-content" class="pointer-events-auto">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>小岫村</h5>
+                            <p>安徽省歙县三阳镇<br>
+                               洪路来家</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>请联系</h5>
+                            <p><i class="fa fa-mobile"></i> <a href="tel://+8613955965061">+86 139-5596-5061</a><br>
+                                <i class="fa fa-mobile"></i> <a href="tel://+8618616815502">+86 186-1681-5502</a></p>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="text-center" style="padding: 5px;">
+                            <a class="btn btn-accent btn-small" id="btn-show-map"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;显式地图</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="rsvp text-center" id="rsvp">
