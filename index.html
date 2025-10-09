@@ -278,11 +278,10 @@
                     };
 
                     function update(){
-                    const diff = weddingDate - new Date();
-                    if(diff <= 0){
-                        document.getElementById('wedding-countdown').innerHTML =
-                        '<h4>婚礼进行中！</h4>';
-                        return;
+                    // use a mutable diff so when the target time has passed we show 00:00:00:00
+                    let diff = weddingDate - new Date();
+                    if (diff <= 0) {
+                        diff = 0;
                     }
                     const d = Math.floor(diff / 864e5);
                     const h = Math.floor((diff % 864e5) / 36e5);
